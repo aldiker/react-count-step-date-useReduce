@@ -1,17 +1,24 @@
 import { useReducer, useState } from 'react'
 import { act } from 'react-dom/test-utils'
 
-function reducer(currentState, action) {
-    if (action.type === 'inc') return currentState + 1
-    if (action.type === 'dec') return currentState - 1
-    if (action.type === 'set') return action.payload
+function reducer(state, action) {
+    // if (action.type === 'inc') return currentState + 1
+    // if (action.type === 'dec') return currentState - 1
+    // if (action.type === 'set') return action.payload
+    console.log(state, action)
+
+    switch(action.type) {
+        case 'dec': ...
+    }
+
+
+    return { count: 0, step: 1 }
 }
 
 export default function DateCounter() {
-    // const [count, setCount] = useState(0)
-    const [count, dispatch] = useReducer(reducer, 0)
-
-    const [step, setStep] = useState(1)
+    const initialState = { count: 0, step: 1 }
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const { count, step } = state
 
     const date = new Date()
     date.setDate(date.getDate() + count)
@@ -29,12 +36,12 @@ export default function DateCounter() {
     }
 
     const defineStep = function (e) {
-        setStep(Number(e.target.value))
+        // setStep(Number(e.target.value))
     }
 
     const reset = function () {
         // setCount(0)
-        setStep(1)
+        // setStep(1)
     }
 
     return (
